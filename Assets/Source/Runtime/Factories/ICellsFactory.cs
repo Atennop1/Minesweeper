@@ -5,6 +5,6 @@ namespace Minesweeper.Runtime.Factories
 {
     public interface ICellsFactory
     {
-        ICell[,] Create(IMinedCellsFactory minedCellsFactory, CellsFieldData cellsFieldData);
+        ICell[,] Create(CellsFieldData cellsFieldData);
     }
 }

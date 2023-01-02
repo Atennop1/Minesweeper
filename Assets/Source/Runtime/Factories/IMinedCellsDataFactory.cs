@@ -4,8 +4,8 @@ using Minesweeper.Runtime.Model.Field;
 
 namespace Minesweeper.Runtime.Factories
 {
-    public interface IMinedCellsFactory
+    public interface IMinedCellsDataFactory
     {
-        List<ICell> Create(CellsFieldData cellsFieldData);
+        List<CellData> Create(CellsFieldData cellsFieldData);
     }
 }

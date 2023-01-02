@@ -1,100 +1,45 @@
 ﻿using System;
-using Minesweeper.Runtime.Extensions.CellDataExtensions;
 using Minesweeper.Runtime.Model.Cells;
+using Minesweeper.Runtime.Model.Cells.NearbyBombsCounter;
 using Minesweeper.Runtime.Model.Field;
+using Minesweeper.Runtime.Model.GameState;
 using UnityEngine;
 
 namespace Minesweeper.Runtime.Factories
 {
     public class CellsFactory : MonoBehaviour, ICellsFactory
     {
-        public ICell[,] Create(IMinedCellsFactory minedCellsFactory, CellsFieldData cellsFieldData)
+        [SerializeField] private IGameOverHandler _gameOverHandler;
+        
+        private IMinedCellsDataFactory _minedCellsDataFactory;
+        
+        public void Init(IMinedCellsDataFactory minedCellsDataFactory)
         {
-            if (minedCellsFactory == null)
-                throw new ArgumentException("MinedCellsFactory can't be null");
-            
-            var minedCells = minedCellsFactory.Create(cellsFieldData);
+            _minedCellsDataFactory = minedCellsDataFactory ?? throw new ArgumentException("MinedCellsFactory can't be null");
+        }
+        
+        public ICell[,] Create(CellsFieldData cellsFieldData)
+        {
+            var minedCellsData = _minedCellsDataFactory.Create(cellsFieldData);
             var cells = new ICell[cellsFieldData.SizeY, cellsFieldData.SizeX];
+            var nearbyBombsCounter = new NearbyBombsCounter(cells, cellsFieldData);
 
-            for (var i = 0; i < cellsFieldData.SizeY; i++)
+            for (var positionY = 0; positionY < cellsFieldData.SizeY; positionY++)
             {
-                for (var j = 0; j < cellsFieldData.SizeX; j++)
+                for (var positionX = 0; positionX < cellsFieldData.SizeX; positionX++)
                 {
-                    if (minedCells.Exists(cell => cell.Data.PositionX == j && cell.Data.PositionY == i))
-                        cells[i, j] = minedCells.Find(cell => cell.Data.PositionX == j && cell.Data.PositionY == i);
+                    if (minedCellsData.Exists(data => data.PositionX == positionX && data.PositionY == positionY))
+                        cells[positionY, positionX] = new Cell(_gameOverHandler, minedCellsData.Find(data => data.PositionX == positionX && data.PositionY == positionY));
 
-                    var tempCellData = new CellData(j, i, 0, false);
-                    var bombsCount = GetBombsCountNearbyOfCellInMainDirections(tempCellData, cells, cellsFieldData) +
-                                        GetBombsCountNearbyOfCellInSecondaryDirections(tempCellData, cells, cellsFieldData);
+                    var tempCellData = new CellData(positionX, positionY, 0, false);
+                    var bombsCount = nearbyBombsCounter.Calculate(tempCellData);
 
-                    var cell = new Cell(new CellData(j, i, bombsCount, false));
-                    cells[i, j] = cell;
+                    var cell = new Cell(_gameOverHandler, new CellData(positionX, positionY, bombsCount, false));
+                    cells[positionY, positionX] = cell;
                 }
             }
 
             return cells;
-        }
-
-        private int GetBombsCountNearbyOfCellInMainDirections(CellData cellData, ICell[,] cells, CellsFieldData cellsFieldData)
-        {
-            var bombsCount = 0;
-
-            if (cellData.IsExistCellAboveThis(cellsFieldData))
-            {
-                var cell = cellData.GetCellAboveThis(cells);
-                if (cell != null) bombsCount += cell.Data.IsMined ? 1 : 0;
-            }
-
-            if (cellData.IsExistCellUnderThis(cellsFieldData))
-            {
-                var cell = cellData.GetCellUnderThis(cells);
-                if (cell != null) bombsCount += cell.Data.IsMined ? 1 : 0;
-            }
-
-            if (cellData.IsExistCellToLeftThis(cellsFieldData))
-            {
-                var cell = cellData.GetCellToLeftOfThis(cells);
-                if (cell != null) bombsCount += cell.Data.IsMined ? 1 : 0;
-            }
-
-            if (cellData.IsExistCellToRightOfThis(cellsFieldData))
-            {
-                var cell = cellData.GetCellToRightOfThis(cells);
-                if (cell != null) bombsCount += cell.Data.IsMined ? 1 : 0;
-            }
-
-            return bombsCount;
-        }
-        
-        private int GetBombsCountNearbyOfCellInSecondaryDirections(CellData cellData, ICell[,] cells, CellsFieldData cellsFieldData)
-        {
-            var bombsCount = 0;
-
-            if (cellData.IsExistCellAboveThisOnTheLeft(cellsFieldData))
-            {
-                var cell = cellData.GetCellAboveThisOnTheLeft(cells);
-                if (cell != null) bombsCount += cell.Data.IsMined ? 1 : 0;
-            }
-
-            if (cellData.IsExistCellAboveThisOnTheRight(cellsFieldData))
-            {
-                var cell = cellData.GetCellAboveThisOnTheRight(cells);
-                if (cell != null) bombsCount += cell.Data.IsMined ? 1 : 0;
-            }
-
-            if (cellData.IsExistCellUnderThisOnTheRight(cellsFieldData))
-            {
-                var cell = cellData.GetCellUnderThisOnTheRight(cells);
-                if (cell != null) bombsCount += cell.Data.IsMined ? 1 : 0;
-            }
-
-            if (cellData.IsExistCelUnderThisOnTheLeft(cellsFieldData))
-            {
-                var cell = cellData.GetCellUnderThisOnTheLeft(cells);
-                if (cell != null) bombsCount += cell.Data.IsMined ? 1 : 0;
-            }
-
-            return bombsCount;
         }
     }
 }

@@ -1,25 +1,18 @@
 ﻿using System;
 using Minesweeper.Runtime.Extensions.CellDataExtensions;
-using Minesweeper.Runtime.Factories;
 using Minesweeper.Runtime.Model.Cells;
 
 namespace Minesweeper.Runtime.Model.Field
 {
     public class CellsField : ICellsField
     {
-        private readonly CellsFieldData _cellsFieldData;
-        private readonly ICell[,] _cells;
+        public CellsFieldData CellsFieldData { get; }
+        public ICell[,] Cells { get; }
 
-        public CellsField(ICellsFactory cellsFactory, IMinedCellsFactory minedCellsFactory , CellsFieldData cellsFieldData)
+        public CellsField(ICell[,] cells, CellsFieldData cellsFieldData)
         {
-            if (cellsFactory == null)
-                throw new ArgumentException("CellsFactory can't be null");
-
-            if (minedCellsFactory == null)
-                throw new ArgumentException("MinedCellsFactory can't be null");
-            
-            _cellsFieldData = cellsFieldData;
-            _cells = cellsFactory.Create(minedCellsFactory, cellsFieldData);
+            CellsFieldData = cellsFieldData;
+            Cells = cells ?? throw new ArgumentException("Cells can't be null");
         }
 
         public void OpenCell(ICell cell)
@@ -35,32 +28,32 @@ namespace Minesweeper.Runtime.Model.Field
         
         private void OpenCellsInTheMainDirections(ICell cell)
         {
-            if (cell.Data.IsExistCellAboveThis(_cellsFieldData))
-                OpenCell(cell.Data.GetCellAboveThis(_cells));
+            if (cell.Data.IsExistCellAboveThis(CellsFieldData))
+                OpenCell(cell.Data.GetCellAboveThis(Cells));
             
-            if (cell.Data.IsExistCellUnderThis(_cellsFieldData))
-                OpenCell(cell.Data.GetCellUnderThis(_cells));
+            if (cell.Data.IsExistCellUnderThis(CellsFieldData))
+                OpenCell(cell.Data.GetCellUnderThis(Cells));
             
-            if (cell.Data.IsExistCellToLeftThis(_cellsFieldData))
-                OpenCell(cell.Data.GetCellToLeftOfThis(_cells));
+            if (cell.Data.IsExistCellToLeftThis(CellsFieldData))
+                OpenCell(cell.Data.GetCellToLeftOfThis(Cells));
             
-            if (cell.Data.IsExistCellToRightOfThis(_cellsFieldData))
-                OpenCell(cell.Data.GetCellToRightOfThis(_cells));
+            if (cell.Data.IsExistCellToRightOfThis(CellsFieldData))
+                OpenCell(cell.Data.GetCellToRightOfThis(Cells));
         }
 
         private void OpenCellsInTheSecondaryDirections(ICell cell)
         {
-            if (cell.Data.IsExistCellAboveThisOnTheLeft(_cellsFieldData))
-                OpenCell(cell.Data.GetCellAboveThisOnTheLeft(_cells));
+            if (cell.Data.IsExistCellAboveThisOnTheLeft(CellsFieldData))
+                OpenCell(cell.Data.GetCellAboveThisOnTheLeft(Cells));
             
-            if (cell.Data.IsExistCellAboveThisOnTheRight(_cellsFieldData))
-                OpenCell(cell.Data.GetCellAboveThisOnTheRight(_cells));
+            if (cell.Data.IsExistCellAboveThisOnTheRight(CellsFieldData))
+                OpenCell(cell.Data.GetCellAboveThisOnTheRight(Cells));
             
-            if (cell.Data.IsExistCellUnderThisOnTheRight(_cellsFieldData))
-                OpenCell(cell.Data.GetCellUnderThisOnTheRight(_cells));
+            if (cell.Data.IsExistCellUnderThisOnTheRight(CellsFieldData))
+                OpenCell(cell.Data.GetCellUnderThisOnTheRight(Cells));
             
-            if (cell.Data.IsExistCelUnderThisOnTheLeft(_cellsFieldData))
-                OpenCell(cell.Data.GetCellUnderThisOnTheLeft(_cells));
+            if (cell.Data.IsExistCelUnderThisOnTheLeft(CellsFieldData))
+                OpenCell(cell.Data.GetCellUnderThisOnTheLeft(Cells));
         }
     }
 }
