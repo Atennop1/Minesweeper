@@ -4,7 +4,7 @@ namespace Minesweeper.Runtime.Model.Field
 {
     public interface ICellsField
     {
-        CellsFieldData CellsFieldData { get; }
+        CellsFieldData FieldData { get; }
         ICell[,] Cells { get; }
         void OpenCell(ICell cell);
     }
