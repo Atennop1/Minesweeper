@@ -15,10 +15,10 @@ namespace Minesweeper.Runtime.Model.Field
             TotalBombsCount = totalBombsCount;
         }
 
-        public bool IsCellExist(CellData cellData)
+        public bool IsCellExist(int positionX, int positionY)
         {
-            return cellData.PositionX >= 0 && cellData.PositionX < SizeX &&
-                   cellData.PositionY >= 0 && cellData.PositionY < SizeY;
+            return positionX >= 0 && positionX < SizeX &&
+                   positionY >= 0 && positionY < SizeY;
         }
     }
 }

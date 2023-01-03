@@ -25,8 +25,8 @@ namespace Minesweeper.Runtime.Model.Cells.NearbyBombsCounter
                     if (x == 0 && y == 0)
                         continue;
 
-                    if (_fieldData.IsCellExist(_cells[y, x].Data))
-                        countOfBombs += _cells[y, x].Data.IsMined ? 1 : 0;
+                    if (_fieldData.IsCellExist(cellData.PositionX + x, cellData.PositionY + y))
+                        countOfBombs += _cells[cellData.PositionY + y, cellData.PositionX + x].Data.IsMined ? 1 : 0;
                 }
             }
 

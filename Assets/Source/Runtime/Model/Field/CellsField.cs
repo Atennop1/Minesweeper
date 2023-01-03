@@ -31,8 +31,8 @@ namespace Minesweeper.Runtime.Model.Field
                     if (x == 0 && y == 0)
                         continue;
                     
-                    if (FieldData.IsCellExist(Cells[y, x].Data))
-                        OpenCell(Cells[y, x]);
+                    if (FieldData.IsCellExist(cell.Data.PositionX + x, cell.Data.PositionY + y))
+                        OpenCell(Cells[cell.Data.PositionY + y, cell.Data.PositionX + x]);
                 }
             }
         }
