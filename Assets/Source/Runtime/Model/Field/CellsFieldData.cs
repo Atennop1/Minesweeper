@@ -1,6 +1,4 @@
-﻿using Minesweeper.Runtime.Model.Cells;
-
-namespace Minesweeper.Runtime.Model.Field
+﻿namespace Minesweeper.Runtime.Model.Field
 {
     public readonly struct CellsFieldData
     {

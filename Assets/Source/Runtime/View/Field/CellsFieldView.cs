@@ -1,5 +1,6 @@
 using System;
 using Minesweeper.Runtime.Model.Field;
+using Minesweeper.Runtime.Model.InteractionsWithCell;
 using Minesweeper.Runtime.View.Cells;
 using UnityEngine;
 
@@ -11,10 +12,17 @@ namespace Minesweeper.Runtime.View.Field
         [SerializeField] private GameObject _cellsLinePrefab;
         [SerializeField] private GameObject _cellPrefab;
 
+        private IInteractionWithCellSelector _interactionWithCellSelector;
+
         private void Awake()
         {
             if (!_cellPrefab.TryGetComponent(out ICellView _))
                 throw new ArgumentException("CellPrefab must have an ICellView component");
+        }
+
+        public void Init(IInteractionWithCellSelector selector)
+        {
+            _interactionWithCellSelector = selector ?? throw new ArgumentException("Selector can't be null");
         }
         
         public void Display(ICellsField field)
@@ -35,7 +43,8 @@ namespace Minesweeper.Runtime.View.Field
                     
                     createdCellView.AddButtonOnClickListener(() =>
                     {
-                        cell.Open();
+                        _interactionWithCellSelector.CurrentInteraction.Interact(cell);
+                        createdCellView.Display(cell);
                     });
                 }
             }

@@ -1,4 +1,5 @@
 ﻿using Minesweeper.Runtime.Model.Cells;
+using Minesweeper.Runtime.View.Flag;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -8,11 +9,9 @@ namespace Minesweeper.Runtime.View.Cells
 {
     public class CellView : MonoBehaviour, ICellView
     {
+        [SerializeField] private IFlagView _flagView;
         [SerializeField] private Button _usingButton;
         [SerializeField] private TextMeshProUGUI _bombsText;
-        
-        [Space]
-        [SerializeField] private Image _foregroundImage;
         [SerializeField] private Animator _animator;
         
         private readonly int OPEN_ANIMATOR_NAME = Animator.StringToHash("Open");
@@ -22,9 +21,12 @@ namespace Minesweeper.Runtime.View.Cells
 
         public void Display(ICell cell)
         {
+            _flagView.Display(cell);
             _bombsText.text = cell.Data.CountOfBombsNearby.ToString();
-            _foregroundImage.gameObject.SetActive(cell.IsOpened);
 
+            if (cell.IsOpened)
+                _usingButton.enabled = false;
+            
             switch (cell.IsOpened)
             {
                 case true when cell.Data.IsMined:
