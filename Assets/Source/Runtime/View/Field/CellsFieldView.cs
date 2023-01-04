@@ -12,7 +12,7 @@ namespace Minesweeper.Runtime.View.Field
         [SerializeField] private GameObject _cellsLinePrefab;
         [SerializeField] private GameObject _cellPrefab;
 
-        private IInteractionSelector _interactionSelector;
+        private CellViewInitializer _cellViewInitializer;
 
         private void Awake()
         {
@@ -20,9 +20,9 @@ namespace Minesweeper.Runtime.View.Field
                 throw new ArgumentException("CellPrefab must have an ICellView component");
         }
 
-        public void Init(IInteractionSelector selector)
+        public void Init(CellViewInitializer cellViewInitializer)
         {
-            _interactionSelector = selector ?? throw new ArgumentException("Selector can't be null");
+            _cellViewInitializer = cellViewInitializer ?? throw new ArgumentException("CellViewInitializer can't be null");
         }
         
         public void Display(ICellsField field)
@@ -39,13 +39,8 @@ namespace Minesweeper.Runtime.View.Field
                     var createdCellView = createdCellViewObject.GetComponent<ICellView>();
 
                     var cell = field.Cells[positionY, positionX];
+                    _cellViewInitializer.InitializeCellView(cell, createdCellView);
                     createdCellView.Display(cell);
-                    
-                    createdCellView.AddButtonOnClickListener(() =>
-                    {
-                        _interactionSelector.CurrentInteraction.Interact(cell);
-                        createdCellView.Display(cell);
-                    });
                 }
             }
         }

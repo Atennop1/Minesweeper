@@ -1,17 +1,18 @@
 ﻿using System;
+using Minesweeper.Runtime.Model.Buttons;
+using Minesweeper.Runtime.Model.Buttons.ClickActions;
 using Minesweeper.Runtime.Model.Interactions;
 using UnityEngine;
-using UnityEngine.UI;
 
 namespace Minesweeper.Runtime.View.Interactions
 {
     public class InteractionSelectorView : MonoBehaviour, IInteractionSelectorView
     {
-        [SerializeField] private Image _digInteractionSelectedImage;
-        [SerializeField] private Image _flagInteractionSelectedImage;
+        [SerializeField] private IInteractionView _digInteractionView;
+        [SerializeField] private IInteractionView _flagInteractionView;
         
-        [SerializeField] private Button _digInteractionButton;
-        [SerializeField] private Button _flagInteractionButton;
+        [SerializeField] private IButton _digInteractionButton;
+        [SerializeField] private IButton _flagInteractionButton;
         
         private IInteractionSelector _selector;
         private FlagInteraction _flagInteraction;
@@ -19,22 +20,11 @@ namespace Minesweeper.Runtime.View.Interactions
 
         private void Start()
         {
-            _flagInteractionButton.onClick.AddListener(() =>
-            {
-                _selector.Select(_flagInteraction);
-                Display(_selector);
-            });
-            
-            _digInteractionButton.onClick.AddListener(() =>
-            {
-                _selector.Select(_digInteraction);
-                Display(_selector);
-            });
+            _flagInteractionButton.AddListener(new InteractionSelectButtonAction(this, _selector, _flagInteraction));
+            _digInteractionButton.AddListener(new InteractionSelectButtonAction(this, _selector, _flagInteraction));
         }
         
-        public void Init(IInteractionSelector selector, 
-            FlagInteraction flagInteraction,
-            DigInteraction digInteraction)
+        public void Init(IInteractionSelector selector, FlagInteraction flagInteraction, DigInteraction digInteraction)
         {
             _selector = selector ?? throw new ArgumentException("Selector can't be null");
             _flagInteraction = flagInteraction ?? throw new ArgumentException("FlagInteractionWithCell can't be null");
@@ -43,16 +33,16 @@ namespace Minesweeper.Runtime.View.Interactions
 
         public void Display(IInteractionSelector selector)
         {
-            if (_selector.CurrentInteraction == _flagInteraction)
+            if (selector.CurrentInteraction == _flagInteraction)
             {
-                _flagInteractionSelectedImage.enabled = true;
-                _digInteractionSelectedImage.enabled = false;
+                _digInteractionView.DisplayUnselected();
+                _flagInteractionView.DisplaySelected();
             }
             
-            if (_selector.CurrentInteraction == _digInteraction)
+            if (selector.CurrentInteraction == _digInteraction)
             {
-                _flagInteractionSelectedImage.enabled = false;
-                _digInteractionSelectedImage.enabled = true;
+                _digInteractionView.DisplaySelected();
+                _flagInteractionView.DisplayUnselected();
             }
         }
     }

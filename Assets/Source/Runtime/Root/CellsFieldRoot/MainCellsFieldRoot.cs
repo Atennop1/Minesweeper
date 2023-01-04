@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Minesweeper.Runtime.Model.Cells;
 using Minesweeper.Runtime.Model.Interactions;
+using Minesweeper.Runtime.View.Cells;
 using Minesweeper.Runtime.View.Field;
 using Sirenix.OdinInspector;
 using UnityEngine;
@@ -23,7 +24,7 @@ namespace Minesweeper.Runtime.Root
             var interactionsSelector = interactionsSelectorRoot.Compose(cellsField);
             interactionsSelector.Select(new StartGameInteraction(this));
             
-            _cellsFieldView.Init(interactionsSelector);
+            _cellsFieldView.Init(new CellViewInitializer(interactionsSelector));
             _cellsFieldView.Display(cellsField);
         }
 
