@@ -13,7 +13,7 @@ namespace Minesweeper.Runtime.Root
 
         public ICellsField Compose(List<Vector2Int> forbiddenCellsPosition)
         {
-            var fieldData = new CellsFieldData(16, 8, 20);
+            var fieldData = new CellsFieldData(16, 7, 20);
             _minedCellsDataFactory.Init(forbiddenCellsPosition);
             _cellsFactory.Init(_minedCellsDataFactory);
             

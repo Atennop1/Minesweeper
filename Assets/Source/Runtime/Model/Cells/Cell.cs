@@ -8,7 +8,7 @@ namespace Minesweeper.Runtime.Model.Cells
         public bool IsOpened { get; private set; }
         public bool IsFlagged { get; private set; }
 
-        public Cell( CellData data) => Data = data;
+        public Cell(CellData data) => Data = data;
 
         public void SetFlag()
         {

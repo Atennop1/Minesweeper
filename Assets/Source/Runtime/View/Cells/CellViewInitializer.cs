@@ -18,7 +18,6 @@ namespace Minesweeper.Runtime.View.Cells
             cellView.AddButtonOnClickListener(() =>
             {
                 _interactionSelector.CurrentInteraction.Interact(cell);
-                cellView.Display(cell);
             });
         }
     }

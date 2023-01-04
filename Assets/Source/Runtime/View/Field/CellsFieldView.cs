@@ -1,6 +1,5 @@
 using System;
 using Minesweeper.Runtime.Model.Field;
-using Minesweeper.Runtime.Model.Interactions;
 using Minesweeper.Runtime.View.Cells;
 using UnityEngine;
 
@@ -40,7 +39,7 @@ namespace Minesweeper.Runtime.View.Field
 
                     var cell = field.Cells[positionY, positionX];
                     _cellViewInitializer.InitializeCellView(cell, createdCellView);
-                    createdCellView.Display(cell);
+                    createdCellView.Init(cell);
                 }
             }
         }

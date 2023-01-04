@@ -2,15 +2,17 @@
 using Minesweeper.Runtime.Model.Buttons;
 using Minesweeper.Runtime.Model.Buttons.ClickActions;
 using Minesweeper.Runtime.Model.Interactions;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Minesweeper.Runtime.View.Interactions
 {
-    public class InteractionSelectorView : MonoBehaviour, IInteractionSelectorView
+    public class InteractionSelectorView : SerializedMonoBehaviour, IInteractionSelectorView
     {
         [SerializeField] private IInteractionView _digInteractionView;
         [SerializeField] private IInteractionView _flagInteractionView;
         
+        [Space]
         [SerializeField] private IButton _digInteractionButton;
         [SerializeField] private IButton _flagInteractionButton;
         

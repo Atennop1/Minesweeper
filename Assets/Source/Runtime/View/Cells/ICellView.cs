@@ -6,6 +6,6 @@ namespace Minesweeper.Runtime.View.Cells
     public interface ICellView
     {
         void AddButtonOnClickListener(UnityAction unityEvent);
-        void Display(ICell cell);
+        void Init(ICell cell);
     }
 }

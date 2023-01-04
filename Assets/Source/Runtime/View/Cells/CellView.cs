@@ -1,4 +1,5 @@
-﻿using Minesweeper.Runtime.Model.Cells;
+﻿using System;
+using Minesweeper.Runtime.Model.Cells;
 using Minesweeper.Runtime.View.Flag;
 using Sirenix.OdinInspector;
 using TMPro;
@@ -18,19 +19,51 @@ namespace Minesweeper.Runtime.View.Cells
         private readonly int OPEN_ANIMATOR_NAME = Animator.StringToHash("Open");
         private readonly int EXPLOSION_ANIMATOR_NAME = Animator.StringToHash("Explosion");
         
+        private ICell _visualizingCell;
+        private ICell _lastVersionOfCell;
+        
         public void AddButtonOnClickListener(UnityAction unityEvent) => _usingButton.onClick.AddListener(unityEvent);
 
-        public void Display(ICell cell)
+        public void Init(ICell cell)
         {
-            _flagView.Display(cell);
-            _bombsText.text = cell.Data.CountOfBombsNearby.ToString();
+            _visualizingCell = cell ?? throw new ArgumentException("Cell can't be null");
+            _lastVersionOfCell = new Cell(_visualizingCell.Data);
+            Display();
+        }
+        
+        private void Update()
+        {
+            if (_lastVersionOfCell.IsOpened != _visualizingCell.IsOpened)
+            {
+                _lastVersionOfCell.Open();
+                Display();
+            }
 
-            if (cell.IsOpened)
+            if (!_lastVersionOfCell.IsFlagged && _visualizingCell.IsFlagged)
+            {
+                _lastVersionOfCell.SetFlag();
+                Display();
+            }
+            
+            if (_lastVersionOfCell.IsFlagged && !_visualizingCell.IsFlagged)
+            {
+                _lastVersionOfCell.SetFlag();
+                Display();
+            }
+        }
+        
+        private void Display()
+        {
+            Debug.Log("display");
+            _flagView.Display(_visualizingCell);
+            _bombsText.text = _visualizingCell.Data.CountOfBombsNearby.ToString();
+
+            if (_visualizingCell.IsOpened)
                 _usingButton.enabled = false;
             
-            switch (cell.IsOpened)
+            switch (_visualizingCell.IsOpened)
             {
-                case true when cell.Data.IsMined:
+                case true when _visualizingCell.Data.IsMined:
                     _animator.Play(EXPLOSION_ANIMATOR_NAME);
                     return;
                 

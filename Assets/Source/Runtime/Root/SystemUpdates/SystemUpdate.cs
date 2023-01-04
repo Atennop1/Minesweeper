@@ -5,7 +5,7 @@ namespace Minesweeper.Runtime.Root.SystemUpdates
 {
     public class SystemUpdate : ISystemUpdate
     {
-        private readonly List<IUpdatable> _updatables;
+        private readonly List<IUpdatable> _updatables = new();
 
         public void UpdateAll() => _updatables.ForEach(updatable => updatable.Update());
 

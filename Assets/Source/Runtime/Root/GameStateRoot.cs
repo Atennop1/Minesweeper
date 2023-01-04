@@ -23,6 +23,6 @@ namespace Minesweeper.Runtime.Root
             _systemUpdate.AddUpdatable(gameOver);
         }
 
-        private void Update() => _systemUpdate.UpdateAll();
+        private void Update() => _systemUpdate?.UpdateAll();
     }
 }

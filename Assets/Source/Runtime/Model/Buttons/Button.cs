@@ -8,7 +8,7 @@ namespace Minesweeper.Runtime.Model.Buttons
     [RequireComponent(typeof(UnityButton))]
     public class Button : MonoBehaviour, IButton
     {
-        [SerializeField] private UnityButton _button;
+        private UnityButton _button;
 
         public void AddListener(IButtonClickAction action)
         {

@@ -24,12 +24,12 @@ namespace Minesweeper.Runtime.Factories
             while (minedCellsData.Count < cellsFieldData.TotalBombsCount)
             {
                 var generatedCellData = new CellData(Random.Range(0, cellsFieldData.SizeX),
-                    Random.Range(0, cellsFieldData.SizeY), 1, true);
+                    Random.Range(0, cellsFieldData.SizeY), 0, true);
 
-                if (!minedCellsData.Exists(data =>
+                if (minedCellsData.Exists(data =>
                         data.PositionX == generatedCellData.PositionX &&
-                        data.PositionY == generatedCellData.PositionY) &&
-                    !_forbiddenCellsPosition.Exists(position =>
+                        data.PositionY == generatedCellData.PositionY) ||
+                    _forbiddenCellsPosition.Exists(position =>
                         position.x == generatedCellData.PositionX &&
                         position.y == generatedCellData.PositionY)) continue;
                 

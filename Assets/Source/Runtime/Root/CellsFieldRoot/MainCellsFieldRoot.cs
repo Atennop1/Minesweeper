@@ -17,18 +17,19 @@ namespace Minesweeper.Runtime.Root
 
         public void Compose(CellData tapedCellData)
         {
-            var forbiddenCellsData = BuildForbiddenCellsDataList(tapedCellData);
+            var forbiddenCellsData = BuildForbiddenCellsCoordinate(tapedCellData);
             var cellsField = _fieldRoot.Compose(forbiddenCellsData);
             
             _gameStateRoot.Compose(cellsField.Cells);
             var interactionsSelector = interactionsSelectorRoot.Compose(cellsField);
-            interactionsSelector.Select(new StartGameInteraction(this));
+            interactionsSelector.Select(new DigInteraction(cellsField));
             
             _cellsFieldView.Init(new CellViewInitializer(interactionsSelector));
+            cellsField.OpenCell(new Cell(tapedCellData));
             _cellsFieldView.Display(cellsField);
         }
 
-        private List<Vector2Int> BuildForbiddenCellsDataList(CellData tapedCellData)
+        private List<Vector2Int> BuildForbiddenCellsCoordinate(CellData tapedCellData)
         {
             var forbiddenCellsData = new List<Vector2Int>();
 
