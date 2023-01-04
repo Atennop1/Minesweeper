@@ -1,5 +1,4 @@
 ﻿using System;
-using Minesweeper.Runtime.Model.GameState;
 
 namespace Minesweeper.Runtime.Model.Cells
 {
@@ -8,14 +7,8 @@ namespace Minesweeper.Runtime.Model.Cells
         public CellData Data { get; }
         public bool IsOpened { get; private set; }
         public bool IsFlagged { get; private set; }
-        
-        private readonly IGameOverHandler _gameOverHandler;
 
-        public Cell(IGameOverHandler gameOverHandler, CellData data)
-        {
-            Data = data;
-            _gameOverHandler = gameOverHandler ?? throw new ArgumentException("GameOverHandler can't be null");
-        }
+        public Cell( CellData data) => Data = data;
 
         public void SetFlag()
         {
@@ -39,9 +32,6 @@ namespace Minesweeper.Runtime.Model.Cells
             
             if (IsFlagged)
                 RemoveFlag();
-
-            if (Data.IsMined)
-                _gameOverHandler.Handle();
         }
     }
 }

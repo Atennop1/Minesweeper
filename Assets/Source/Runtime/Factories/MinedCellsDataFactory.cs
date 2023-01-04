@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using Minesweeper.Runtime.Model.Cells;
 using Minesweeper.Runtime.Model.Field;
-using Minesweeper.Runtime.Model.GameState;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,11 +9,12 @@ namespace Minesweeper.Runtime.Factories
 {
     public class MinedCellsDataFactory : MonoBehaviour, IMinedCellsDataFactory
     {
-        private List<CellData> _forbiddenCellsData;
+        private List<Vector2Int> _forbiddenCellsPosition;
 
-        public void Init(List<CellData> forbiddenCells)
+        public void Init(List<Vector2Int> forbiddenCellsPosition)
         {
-            _forbiddenCellsData = forbiddenCells ?? throw new ArgumentException("ForbiddenCells can't be null");
+            _forbiddenCellsPosition =
+                forbiddenCellsPosition ?? throw new ArgumentException("ForbiddenCellsPosition can't be null");
         }
         
         public List<CellData> Create(CellsFieldData cellsFieldData)
@@ -29,9 +29,9 @@ namespace Minesweeper.Runtime.Factories
                 if (!minedCellsData.Exists(data =>
                         data.PositionX == generatedCellData.PositionX &&
                         data.PositionY == generatedCellData.PositionY) &&
-                    !_forbiddenCellsData.Exists(data =>
-                        data.PositionX == generatedCellData.PositionX &&
-                        data.PositionY == generatedCellData.PositionY)) continue;
+                    !_forbiddenCellsPosition.Exists(position =>
+                        position.x == generatedCellData.PositionX &&
+                        position.y == generatedCellData.PositionY)) continue;
                 
                 minedCellsData.Add(generatedCellData);
             }

@@ -1,8 +1,8 @@
 ﻿using Minesweeper.Runtime.Model.Cells;
 
-namespace Minesweeper.Runtime.Model.InteractionsWithCell
+namespace Minesweeper.Runtime.Model.Interactions
 {
-    public class FlagInteractionWithCell : IInteractionWithCell
+    public class FlagInteraction : IInteraction
     {
         public void Interact(ICell cell)
         {

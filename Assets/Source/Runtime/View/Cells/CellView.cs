@@ -1,5 +1,6 @@
 ﻿using Minesweeper.Runtime.Model.Cells;
 using Minesweeper.Runtime.View.Flag;
+using Sirenix.OdinInspector;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Events;
@@ -7,7 +8,7 @@ using UnityEngine.UI;
 
 namespace Minesweeper.Runtime.View.Cells
 {
-    public class CellView : MonoBehaviour, ICellView
+    public class CellView : SerializedMonoBehaviour, ICellView
     {
         [SerializeField] private IFlagView _flagView;
         [SerializeField] private Button _usingButton;

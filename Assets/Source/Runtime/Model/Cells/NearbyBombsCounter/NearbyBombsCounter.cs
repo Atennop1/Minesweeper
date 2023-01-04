@@ -1,5 +1,6 @@
 ﻿using System;
 using Minesweeper.Runtime.Model.Field;
+using UnityEngine;
 
 namespace Minesweeper.Runtime.Model.Cells.NearbyBombsCounter
 {
@@ -14,7 +15,7 @@ namespace Minesweeper.Runtime.Model.Cells.NearbyBombsCounter
             _fieldData = fieldData;
         }
         
-        public int Calculate(CellData cellData)
+        public int Calculate(Vector2Int position)
         {
             var countOfBombs = 0;
             
@@ -25,8 +26,8 @@ namespace Minesweeper.Runtime.Model.Cells.NearbyBombsCounter
                     if (x == 0 && y == 0)
                         continue;
 
-                    if (_fieldData.IsCellExist(cellData.PositionX + x, cellData.PositionY + y))
-                        countOfBombs += _cells[cellData.PositionY + y, cellData.PositionX + x].Data.IsMined ? 1 : 0;
+                    if (_fieldData.IsCellExist(position.x + x, position.y + y))
+                        countOfBombs += _cells[position.y + y, position.x + x].Data.IsMined ? 1 : 0;
                 }
             }
 

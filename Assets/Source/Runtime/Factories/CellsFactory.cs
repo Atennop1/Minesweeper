@@ -2,15 +2,13 @@
 using Minesweeper.Runtime.Model.Cells;
 using Minesweeper.Runtime.Model.Cells.NearbyBombsCounter;
 using Minesweeper.Runtime.Model.Field;
-using Minesweeper.Runtime.Model.GameState;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Minesweeper.Runtime.Factories
 {
-    public class CellsFactory : MonoBehaviour, ICellsFactory
+    public class CellsFactory : SerializedMonoBehaviour, ICellsFactory
     {
-        [SerializeField] private IGameOverHandler _gameOverHandler;
-        
         private IMinedCellsDataFactory _minedCellsDataFactory;
         
         public void Init(IMinedCellsDataFactory minedCellsDataFactory)
@@ -29,12 +27,10 @@ namespace Minesweeper.Runtime.Factories
                 for (var positionX = 0; positionX < cellsFieldData.SizeX; positionX++)
                 {
                     if (minedCellsData.Exists(data => data.PositionX == positionX && data.PositionY == positionY))
-                        cells[positionY, positionX] = new Cell(_gameOverHandler, minedCellsData.Find(data => data.PositionX == positionX && data.PositionY == positionY));
-
-                    var tempCellData = new CellData(positionX, positionY, 0, false);
-                    var bombsCount = nearbyBombsCounter.Calculate(tempCellData);
-
-                    var cell = new Cell(_gameOverHandler, new CellData(positionX, positionY, bombsCount, false));
+                        cells[positionY, positionX] = new Cell(minedCellsData.Find(data => data.PositionX == positionX && data.PositionY == positionY));
+                    
+                    var bombsCount = nearbyBombsCounter.Calculate(new Vector2Int(positionX, positionY));
+                    var cell = new Cell(new CellData(positionX, positionY, bombsCount, false));
                     cells[positionY, positionX] = cell;
                 }
             }
