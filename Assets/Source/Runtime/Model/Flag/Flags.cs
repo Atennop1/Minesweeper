@@ -17,12 +17,14 @@ namespace Minesweeper.Runtime.Model.Flag
         {
             _flagsView = flagsView ?? throw new ArgumentException("FlagsView can't be null");
             _maxCount = maxCount.TryThrowIfLessOrEqualsZero();
+            
             _count = maxCount;
+            _flagsView.Display(_count);
         }
 
         public void PutFlag()
         {
-            if (CanPut)
+            if (!CanPut)
                 throw new InvalidOperationException("Flags have a maximum value");
             
             _count++;
@@ -31,7 +33,7 @@ namespace Minesweeper.Runtime.Model.Flag
 
         public void TakeFlag()
         {
-            if (CanTake)
+            if (!CanTake)
                 throw new InvalidOperationException("Can't take flag from nothing");
             
             _count--;

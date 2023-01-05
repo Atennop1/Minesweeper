@@ -4,9 +4,8 @@ namespace Minesweeper.Runtime.View.GameState
 {
     public class GameStartView : MonoBehaviour, IGameStartView
     {
-        public void Display()
-        {
-            
-        }
+        [SerializeField] private GameObject _needToTurnOn;
+        
+        public void Display() => _needToTurnOn.SetActive(true);
     }
 }

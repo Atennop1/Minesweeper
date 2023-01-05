@@ -20,17 +20,15 @@ namespace Minesweeper.Runtime.View.Interactions
         private FlagInteraction _flagInteraction;
         private DigInteraction _digInteraction;
 
-        private void Start()
-        {
-            _flagInteractionButton.AddListener(new InteractionSelectButtonAction(this, _selector, _flagInteraction));
-            _digInteractionButton.AddListener(new InteractionSelectButtonAction(this, _selector, _flagInteraction));
-        }
-        
         public void Init(IInteractionSelector selector, FlagInteraction flagInteraction, DigInteraction digInteraction)
         {
             _selector = selector ?? throw new ArgumentException("Selector can't be null");
             _flagInteraction = flagInteraction ?? throw new ArgumentException("FlagInteractionWithCell can't be null");
             _digInteraction = digInteraction ?? throw new ArgumentException("DigInteractionWithCell can't be null");
+            
+            _flagInteractionButton.AddListener(new InteractionSelectButtonAction(this, _selector, _flagInteraction));
+            _digInteractionButton.AddListener(new InteractionSelectButtonAction(this, _selector, _digInteraction));
+            _digInteractionView.DisplaySelected();
         }
 
         public void Display(IInteractionSelector selector)

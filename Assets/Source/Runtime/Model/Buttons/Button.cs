@@ -7,8 +7,8 @@ namespace Minesweeper.Runtime.Model.Buttons
 {
     [RequireComponent(typeof(UnityButton))]
     public class Button : MonoBehaviour, IButton
-    {
-        private UnityButton _button;
+    { 
+        [SerializeField] private UnityButton _button;
 
         public void AddListener(IButtonClickAction action)
         {
@@ -19,6 +19,5 @@ namespace Minesweeper.Runtime.Model.Buttons
         }
 
         private void OnDisable() => _button.onClick.RemoveAllListeners();
-        private void OnEnable() => _button = GetComponent<UnityButton>();
     }
 }

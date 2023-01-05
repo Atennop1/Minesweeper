@@ -21,7 +21,7 @@ namespace Minesweeper.Runtime.Root
             var forbiddenCellsData = BuildForbiddenCellsCoordinate(tapedCellData);
             var cellsField = _fieldRoot.Compose(forbiddenCellsData);
             
-            _gameStateRoot.Compose(cellsField.Cells);
+            _gameStateRoot.Compose(cellsField);
             var interactionsSelector = interactionsSelectorRoot.Compose(cellsField);
             interactionsSelector.Select(new DigInteraction(cellsField));
             

@@ -26,13 +26,10 @@ namespace Minesweeper.Runtime.Model.GameState
         public void Update()
         {
             if (!IsActivated && _cells.Any(cell => cell.IsOpened && cell.Data.IsMined))
-                Activate();
-        }
-
-        private void Activate()
-        {
-            _gameOverView.Display();
-            IsActivated = true;
+            {
+                _gameOverView.Display();
+                IsActivated = true;
+            }
         }
     }
 }
