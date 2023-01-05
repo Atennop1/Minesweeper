@@ -1,11 +1,11 @@
 ﻿using Minesweeper.Runtime.Model.Cells;
-using UnityEngine.Events;
+using Minesweeper.Runtime.Model.Interactions;
 
 namespace Minesweeper.Runtime.View.Cells
 {
     public interface ICellView
     {
-        void AddButtonOnClickListener(UnityAction unityEvent);
-        void Init(ICell cell);
+        void Init(IInteractionSelector interactionSelector);
+        void Display(ICell cell);
     }
 }

@@ -170,16 +170,19 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 1626186124}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: _cellViewFactory
+      Entry: 10
+      Data: 0
   _fieldRoot: {fileID: 744805850}
-  _gameStateRoot: {fileID: 1946618746}
-  _cellsFieldView: {fileID: 1696686236}
   interactionsSelectorRoot: {fileID: 920902856}
+  _gameStateRoot: {fileID: 1946618746}
 --- !u!1 &137541988
 GameObject:
   m_ObjectHideFlags: 0
@@ -649,7 +652,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1587218680}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &744805850
 MonoBehaviour:
@@ -666,14 +669,19 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 1626186124}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: _cellViewFactory
+      Entry: 10
+      Data: 0
   _cellsFactory: {fileID: 786068972}
   _minedCellsDataFactory: {fileID: 1243336155}
+  interactionsSelectorRoot: {fileID: 920902856}
 --- !u!1 &747747864
 GameObject:
   m_ObjectHideFlags: 0
@@ -897,6 +905,7 @@ Transform:
   m_Children:
   - {fileID: 786068971}
   - {fileID: 1243336154}
+  - {fileID: 1626186123}
   m_Father: {fileID: 1863354241}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1077,7 +1086,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1587218680}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1115481433
 MonoBehaviour:
@@ -1094,14 +1103,17 @@ MonoBehaviour:
   serializationData:
     SerializedFormat: 2
     SerializedBytes: 
-    ReferencedUnityObjects: []
+    ReferencedUnityObjects:
+    - {fileID: 1626186124}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
     PrefabModifications: []
-    SerializationNodes: []
+    SerializationNodes:
+    - Name: _cellViewFactory
+      Entry: 10
+      Data: 0
   _fieldRoot: {fileID: 744805850}
-  _cellsFieldView: {fileID: 1696686236}
   interactionsSelectorRoot: {fileID: 920902856}
   _mainCellsFieldRoot: {fileID: 5564738}
 --- !u!1 &1139743911
@@ -1536,12 +1548,68 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1115481432}
   - {fileID: 744805849}
+  - {fileID: 1115481432}
   - {fileID: 5564737}
   m_Father: {fileID: 747747865}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1626186122
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1626186123}
+  - component: {fileID: 1626186124}
+  m_Layer: 0
+  m_Name: CellViewFactory
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1626186123
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626186122}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 871271408}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1626186124
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1626186122}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5082cd8a9d9c4797bf774b24fdf9bc5d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes: []
+  _content: {fileID: 1696686231}
+  _cellsLinePrefab: {fileID: 8852064345874299663, guid: 83d6c569676820f4884d4a44ea1a88fc, type: 3}
+  _cellPrefab: {fileID: 5433801426040413570, guid: 168159a4e8acd7140b2418a168c553b0, type: 3}
 --- !u!1 &1696686230
 GameObject:
   m_ObjectHideFlags: 0
@@ -1555,7 +1623,6 @@ GameObject:
   - component: {fileID: 1696686232}
   - component: {fileID: 1696686234}
   - component: {fileID: 1696686235}
-  - component: {fileID: 1696686236}
   m_Layer: 5
   m_Name: CellsFieldView
   m_TagString: Untagged
@@ -1661,21 +1728,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_HorizontalFit: 2
   m_VerticalFit: 2
---- !u!114 &1696686236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1696686230}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 70a36256938fb2c40b1ad29ebdd88e0d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _content: {fileID: 1696686231}
-  _cellsLinePrefab: {fileID: 8852064345874299663, guid: 83d6c569676820f4884d4a44ea1a88fc, type: 3}
-  _cellPrefab: {fileID: 5433801426040413570, guid: 168159a4e8acd7140b2418a168c553b0, type: 3}
 --- !u!1 &1863354240
 GameObject:
   m_ObjectHideFlags: 0

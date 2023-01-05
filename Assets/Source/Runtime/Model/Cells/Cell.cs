@@ -1,4 +1,5 @@
 ﻿using System;
+using Minesweeper.Runtime.View.Cells;
 
 namespace Minesweeper.Runtime.Model.Cells
 {
@@ -8,7 +9,14 @@ namespace Minesweeper.Runtime.Model.Cells
         public bool IsOpened { get; private set; }
         public bool IsFlagged { get; private set; }
 
-        public Cell(CellData data) => Data = data;
+        private readonly ICellView _cellView;
+
+        public Cell(ICellView cellView, CellData data)
+        {
+            Data = data;
+            _cellView = cellView ?? throw new ArgumentException("CellView can't be null");
+            _cellView.Display(this);
+        }
 
         public void SetFlag()
         {
@@ -16,6 +24,7 @@ namespace Minesweeper.Runtime.Model.Cells
                 throw new ArgumentException("Can't set flag to cell with flag");
                 
             IsFlagged = true;
+            _cellView.Display(this);
         }
 
         public void RemoveFlag()
@@ -24,14 +33,16 @@ namespace Minesweeper.Runtime.Model.Cells
                 throw new ArgumentException("Can't remove flag from cell without flag");
 
             IsFlagged = false;
+            _cellView.Display(this);
         }
 
         public void Open()
         {
-            IsOpened = true;
-            
             if (IsFlagged)
-                RemoveFlag();
+                return;
+
+            IsOpened = true;
+            _cellView.Display(this);
         }
     }
 }

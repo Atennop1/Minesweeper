@@ -1,10 +1,10 @@
 ﻿using System;
 using Minesweeper.Runtime.Model.Cells;
+using Minesweeper.Runtime.Model.Interactions;
+using Minesweeper.Runtime.View.BombsCountView;
 using Minesweeper.Runtime.View.Flag;
 using Sirenix.OdinInspector;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Events;
 using UnityEngine.UI;
 
 namespace Minesweeper.Runtime.View.Cells
@@ -12,65 +12,50 @@ namespace Minesweeper.Runtime.View.Cells
     public class CellView : SerializedMonoBehaviour, ICellView
     {
         [SerializeField] private IFlagView _flagView;
+        [SerializeField] private IBombsCountView _bombsCountView;
+
+        [Space]
+        [SerializeField] private ICellAnimations _cellAnimations;
         [SerializeField] private Button _usingButton;
-        [SerializeField] private TextMeshProUGUI _bombsText;
-        [SerializeField] private Animator _animator;
         
-        private readonly int OPEN_ANIMATOR_NAME = Animator.StringToHash("Open");
-        private readonly int EXPLOSION_ANIMATOR_NAME = Animator.StringToHash("Explosion");
-        
-        private ICell _visualizingCell;
-        private ICell _lastVersionOfCell;
-        
-        public void AddButtonOnClickListener(UnityAction unityEvent) => _usingButton.onClick.AddListener(unityEvent);
+        private IInteractionSelector _interactionSelector;
 
-        public void Init(ICell cell)
+        public void Init(IInteractionSelector interactionSelector)
         {
-            _visualizingCell = cell ?? throw new ArgumentException("Cell can't be null");
-            _lastVersionOfCell = new Cell(_visualizingCell.Data);
-            Display();
+            _interactionSelector = interactionSelector ?? throw new ArgumentException("Cell can't be null");
         }
         
-        private void Update()
+        public void Display(ICell cell)
         {
-            if (_lastVersionOfCell.IsOpened != _visualizingCell.IsOpened)
-            {
-                _lastVersionOfCell.Open();
-                Display();
-            }
+            if (cell == null)
+                throw new InvalidOperationException("You need to init cell first");
 
-            if (!_lastVersionOfCell.IsFlagged && _visualizingCell.IsFlagged)
-            {
-                _lastVersionOfCell.SetFlag();
-                Display();
-            }
-            
-            if (_lastVersionOfCell.IsFlagged && !_visualizingCell.IsFlagged)
-            {
-                _lastVersionOfCell.SetFlag();
-                Display();
-            }
-        }
-        
-        private void Display()
-        {
-            Debug.Log("display");
-            _flagView.Display(_visualizingCell);
-            _bombsText.text = _visualizingCell.Data.CountOfBombsNearby.ToString();
+            SetupUsingButton(cell);
+            _flagView.Display(cell);
+            _bombsCountView.Display(cell.Data.CountOfBombsNearby);
 
-            if (_visualizingCell.IsOpened)
+            if (cell.IsOpened)
                 _usingButton.enabled = false;
             
-            switch (_visualizingCell.IsOpened)
+            switch (cell.IsOpened)
             {
-                case true when _visualizingCell.Data.IsMined:
-                    _animator.Play(EXPLOSION_ANIMATOR_NAME);
+                case true when cell.Data.IsMined:
+                    _cellAnimations.PlayExplosionAnimation();
                     return;
                 
                 case true:
-                    _animator.Play(OPEN_ANIMATOR_NAME);
+                    _cellAnimations.PlayOpenAnimation();
                     break;
             }
+        }
+        
+        private void SetupUsingButton(ICell cell)
+        {
+            if (cell == null)
+                throw new InvalidOperationException("You need to init cell first");
+            
+            _usingButton.onClick.RemoveAllListeners();
+            _usingButton.onClick.AddListener(() => _interactionSelector.CurrentInteraction.Interact(cell));
         }
     }
 }

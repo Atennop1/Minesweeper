@@ -1,11 +1,12 @@
 ﻿using Minesweeper.Runtime.Model.Cells;
+using Sirenix.OdinInspector;
 using UnityEngine;
 
 namespace Minesweeper.Runtime.View.Flag
 {
-    public class FlagView : MonoBehaviour, IFlagView
+    public class FlagView : SerializedMonoBehaviour, IFlagView
     {
-        [SerializeField] private Animator _flagAnimator;
+        [SerializeField] private IFlagAnimations _flagAnimations;
         private bool _isFlagWasActiveLastTime;
         
         public void Display(ICell cell)
@@ -14,7 +15,8 @@ namespace Minesweeper.Runtime.View.Flag
                 return;
 
             _isFlagWasActiveLastTime = cell.IsFlagged;
-            _flagAnimator.Play(cell.IsFlagged ? "SetFlag" : "RemoveFlag");
+            if (cell.IsFlagged) _flagAnimations.PlaySetFlagAnimation();
+            else _flagAnimations.PlayRemoveFlagAnimation();
         }
     }
 }

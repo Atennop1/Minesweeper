@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 2040594767537560347}
   - component: {fileID: 200955931170474737}
   - component: {fileID: 6401084511816900147}
+  - component: {fileID: 4246183546276793089}
   - component: {fileID: 6677277576696470495}
   m_Layer: 5
   m_Name: Flag
@@ -62,7 +63,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
+  m_RaycastTarget: 0
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
@@ -90,7 +91,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e1bd9e7405584822828453e79c8a8eb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _flagAnimator: {fileID: 6677277576696470495}
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 4246183546276793089}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _flagAnimations
+      Entry: 10
+      Data: 0
+--- !u!114 &4246183546276793089
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3417995753806434866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bac4959ba3f948a4b1cce3c1b2a8c9c2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _animator: {fileID: 6677277576696470495}
 --- !u!95 &6677277576696470495
 Animator:
   serializedVersion: 4
@@ -124,6 +150,7 @@ GameObject:
   - component: {fileID: 5433801426040413631}
   - component: {fileID: 5433801426040413628}
   - component: {fileID: 5433801426040413625}
+  - component: {fileID: 8577751094985068004}
   - component: {fileID: 5433801426040413624}
   m_Layer: 5
   m_Name: Cell
@@ -254,6 +281,8 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 6401084511816900147}
+    - {fileID: 861072549098811272}
+    - {fileID: 8577751094985068004}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -262,8 +291,25 @@ MonoBehaviour:
     - Name: _flagView
       Entry: 10
       Data: 0
+    - Name: _bombsCountView
+      Entry: 10
+      Data: 1
+    - Name: _cellAnimations
+      Entry: 10
+      Data: 2
   _usingButton: {fileID: 5433801426040413628}
-  _bombsText: {fileID: 5433801427054395343}
+--- !u!114 &8577751094985068004
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5433801426040413570}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3de554edf29f4aaba0e395ae15d0a342, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
   _animator: {fileID: 5433801426040413624}
 --- !u!95 &5433801426040413624
 Animator:
@@ -372,6 +418,7 @@ GameObject:
   - component: {fileID: 5433801427054395340}
   - component: {fileID: 5433801427054395342}
   - component: {fileID: 5433801427054395343}
+  - component: {fileID: 861072549098811272}
   m_Layer: 5
   m_Name: BombsCount
   m_TagString: Untagged
@@ -496,3 +543,182 @@ MonoBehaviour:
   m_hasFontAssetChanged: 0
   m_baseMaterial: {fileID: 0}
   m_maskOffset: {x: 0, y: 0, z: 0, w: 0}
+--- !u!114 &861072549098811272
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5433801427054395341}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e2bb3f2874046efa67bad4a58f25f31, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects: []
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _colorsForNumbers
+      Entry: 7
+      Data: 0|System.Collections.Generic.List`1[[UnityEngine.Color, UnityEngine.CoreModule]],
+        mscorlib
+    - Name: 
+      Entry: 12
+      Data: 8
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.259433985
+    - Name: 
+      Entry: 4
+      Data: 0.279763281
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0.6320754
+    - Name: 
+      Entry: 4
+      Data: 0.04957454
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0.0191842169
+    - Name: 
+      Entry: 4
+      Data: 0.386792481
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.490566015
+    - Name: 
+      Entry: 4
+      Data: 0.09120163
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0.388355255
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 0
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 7
+      Data: UnityEngine.Color, UnityEngine.CoreModule
+    - Name: 
+      Entry: 4
+      Data: 0.735849
+    - Name: 
+      Entry: 4
+      Data: 0.735849
+    - Name: 
+      Entry: 4
+      Data: 0.735849
+    - Name: 
+      Entry: 4
+      Data: 1
+    - Name: 
+      Entry: 8
+      Data: 
+    - Name: 
+      Entry: 13
+      Data: 
+    - Name: 
+      Entry: 8
+      Data: 
+  _countText: {fileID: 5433801427054395343}
