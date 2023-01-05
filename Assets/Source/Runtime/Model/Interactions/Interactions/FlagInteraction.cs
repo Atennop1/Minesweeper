@@ -15,16 +15,17 @@ namespace Minesweeper.Runtime.Model.Interactions
 
         public void Interact(ICell cell)
         {
-            if (cell.IsFlagged && _flags.CanPut)
+            switch (cell.IsFlagged)
             {
-                cell.RemoveFlag();
-                _flags.PutFlag();
-            }
-            
-            if (!cell.IsFlagged && _flags.CanTake)
-            {
-                cell.SetFlag();
-                _flags.TakeFlag();
+                case true when _flags.CanPut:
+                    cell.RemoveFlag();
+                    _flags.PutFlag();
+                    return;
+                
+                case false when _flags.CanTake:
+                    cell.SetFlag();
+                    _flags.TakeFlag();
+                    break;
             }
         }
     }

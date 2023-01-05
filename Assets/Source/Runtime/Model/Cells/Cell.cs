@@ -38,10 +38,8 @@ namespace Minesweeper.Runtime.Model.Cells
 
         public void Open()
         {
-            if (IsFlagged)
-                return;
-
             IsOpened = true;
+            IsFlagged = false;
             _cellView.Display(this);
         }
     }

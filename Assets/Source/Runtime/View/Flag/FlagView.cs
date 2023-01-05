@@ -13,7 +13,7 @@ namespace Minesweeper.Runtime.View.Flag
         {
             if (_isFlagWasActiveLastTime && cell.IsFlagged || !_isFlagWasActiveLastTime && !cell.IsFlagged)
                 return;
-
+            
             _isFlagWasActiveLastTime = cell.IsFlagged;
             if (cell.IsFlagged) _flagAnimations.PlaySetFlagAnimation();
             else _flagAnimations.PlayRemoveFlagAnimation();

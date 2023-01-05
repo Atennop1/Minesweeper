@@ -13,6 +13,10 @@ namespace Minesweeper.Runtime.Model.Interactions
             _cellsField = cellsField ?? throw new ArgumentException("Cells field can't be null");
         }
 
-        public void Interact(ICell cell) => _cellsField.OpenCell(cell);
+        public void Interact(ICell cell)
+        {
+            if (!cell.IsFlagged)
+                _cellsField.OpenCell(cell);
+        }
     }
 }
