@@ -1,7 +1,7 @@
 ﻿using UnityEditor;
 using UnityEngine;
 
-namespace Minesweeper.Runtime.Model.LoadSystem
+namespace Minesweeper.Runtime.Tools.LoadSystem
 {
     [CreateAssetMenu(fileName = "Scene", menuName = "Create/Scene Data")]
     public sealed class SceneData : ScriptableObject, ISerializationCallbackReceiver

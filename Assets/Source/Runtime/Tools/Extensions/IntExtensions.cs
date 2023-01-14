@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace Minesweeper.Runtime.Extensions
+namespace Minesweeper.Runtime.Tools.Extensions
 {
     public static class IntExtensions
     {

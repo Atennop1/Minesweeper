@@ -1,5 +1,5 @@
 ﻿using System;
-using Minesweeper.Runtime.Extensions;
+using Minesweeper.Runtime.Tools.Extensions;
 using Minesweeper.Runtime.View.Flag;
 
 namespace Minesweeper.Runtime.Model.Flag

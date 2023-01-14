@@ -1,7 +1,7 @@
 ﻿using Cysharp.Threading.Tasks;
 using Minesweeper.Runtime.Model.Buttons;
 using Minesweeper.Runtime.Model.Buttons.ButtonActions;
-using Minesweeper.Runtime.Model.LoadSystem;
+using Minesweeper.Runtime.Tools.LoadSystem;
 using Sirenix.OdinInspector;
 using UnityEngine;
 

@@ -1,6 +1,6 @@
 ﻿using UnityEngine.SceneManagement;
 
-namespace Minesweeper.Runtime.Model.LoadSystem
+namespace Minesweeper.Runtime.Tools.LoadSystem
 {
     public class SceneLoader : ISceneLoader
     {

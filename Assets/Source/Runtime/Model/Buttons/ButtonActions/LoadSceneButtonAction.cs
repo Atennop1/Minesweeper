@@ -1,5 +1,5 @@
 ﻿using System;
-using Minesweeper.Runtime.Model.LoadSystem;
+using Minesweeper.Runtime.Tools.LoadSystem;
 
 namespace Minesweeper.Runtime.Model.Buttons.ButtonActions
 {

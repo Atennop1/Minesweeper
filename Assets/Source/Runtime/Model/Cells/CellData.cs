@@ -1,4 +1,4 @@
-﻿using Minesweeper.Runtime.Extensions;
+﻿using Minesweeper.Runtime.Tools.Extensions;
 
 namespace Minesweeper.Runtime.Model.Cells
 {
