@@ -1303,7 +1303,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07efebc4049d4c00bb42576e85079c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _button: {fileID: 1046417529}
   _timeNeededToHoldInMilliseconds: 100
 --- !u!114 &1046417529
 MonoBehaviour:
@@ -1402,7 +1401,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07efebc4049d4c00bb42576e85079c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _button: {fileID: 1080332577}
   _timeNeededToHoldInMilliseconds: 100
 --- !u!114 &1080332576
 MonoBehaviour:
@@ -1786,7 +1784,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07efebc4049d4c00bb42576e85079c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _button: {fileID: 1152366188}
   _timeNeededToHoldInMilliseconds: 100
 --- !u!1 &1243336153
 GameObject:
@@ -1958,6 +1955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _needToTurnOn: {fileID: 1916201759}
+  _needToHideWhenClassicInput: {fileID: 1916201759}
 --- !u!1 &1421295897
 GameObject:
   m_ObjectHideFlags: 0
@@ -2093,7 +2091,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 07efebc4049d4c00bb42576e85079c13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _button: {fileID: 1421295899}
   _timeNeededToHoldInMilliseconds: 100
 --- !u!1 &1437579004
 GameObject:

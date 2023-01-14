@@ -2,11 +2,13 @@
 using Minesweeper.Runtime.Model.Buttons.ButtonActions;
 using Minesweeper.Runtime.Model.Cells;
 using Minesweeper.Runtime.Model.Interactions;
+using Minesweeper.Runtime.Model.Settings;
+using Minesweeper.Runtime.Tools.SaveSystem;
 using Minesweeper.Runtime.View.BombsCountView;
 using Minesweeper.Runtime.View.Flag;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using Button = Minesweeper.Runtime.Model.Buttons.Button;
+using UnityEngine.UI;
 
 namespace Minesweeper.Runtime.View.Cells
 {
@@ -17,9 +19,11 @@ namespace Minesweeper.Runtime.View.Cells
 
         [Space]
         [SerializeField] private ICellAnimations _cellAnimations;
-        [SerializeField] private Button _usingButton;
+        [SerializeField] private Button _unityUsingButton;
+        [SerializeField] private Model.Buttons.Button _usingButton;
         
         private IInteractionSelector _interactionSelector;
+        private readonly BinaryStorage _inputTypeStorage = new();
         private ICell _cell;
 
         public void InitCell(ICell cell)
@@ -32,14 +36,16 @@ namespace Minesweeper.Runtime.View.Cells
         {
             if (_cell == null)
                 throw new InvalidOperationException("Cell can't be null");
-
-            SetupUsingButton();
+            
             _flagView.Display(_cell);
             _bombsCountView.Display(_cell.Data.CountOfBombsNearby);
 
             if (_cell.IsOpened)
-                _usingButton.enabled = false;
-            
+            {
+                _unityUsingButton.enabled = false;
+                _unityUsingButton.enabled = false;
+            }
+
             switch (_cell.IsOpened)
             {
                 case true when _cell.Data.IsMined:
@@ -52,13 +58,12 @@ namespace Minesweeper.Runtime.View.Cells
             }
         }
         
-        private void SetupUsingButton()
+        private void Awake()
         {
-            _usingButton.RemoveAllListeners();
-            _usingButton.RemoveAllHoldListeners();
+            _unityUsingButton.onClick.AddListener(() => new InteractButtonAction(_cell, _interactionSelector.CurrentInteraction).Invoke());
             
-            _usingButton.AddListener(new InteractButtonAction(_cell, _interactionSelector.CurrentInteraction));
-            _usingButton.AddHoldListener(new InteractButtonAction(_cell, _interactionSelector.CurrentHoldInteraction));
+            if (_inputTypeStorage.Load<InputType>("InputType") == InputType.Classic)
+                _usingButton.AddHoldListener(new InteractButtonAction(_cell, _interactionSelector.CurrentHoldInteraction));
         }
     }
 }
