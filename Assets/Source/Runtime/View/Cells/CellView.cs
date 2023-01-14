@@ -1,11 +1,12 @@
 ﻿using System;
+using Minesweeper.Runtime.Model.Buttons.ButtonActions;
 using Minesweeper.Runtime.Model.Cells;
 using Minesweeper.Runtime.Model.Interactions;
 using Minesweeper.Runtime.View.BombsCountView;
 using Minesweeper.Runtime.View.Flag;
 using Sirenix.OdinInspector;
 using UnityEngine;
-using UnityEngine.UI;
+using Button = Minesweeper.Runtime.Model.Buttons.Button;
 
 namespace Minesweeper.Runtime.View.Cells
 {
@@ -19,27 +20,29 @@ namespace Minesweeper.Runtime.View.Cells
         [SerializeField] private Button _usingButton;
         
         private IInteractionSelector _interactionSelector;
+        private ICell _cell;
 
-        public void Init(IInteractionSelector interactionSelector)
+        public void InitCell(ICell cell)
+            => _cell = cell ?? throw new ArgumentNullException(nameof(cell));
+
+        public void InitSelector(IInteractionSelector interactionSelector)
+            => _interactionSelector = interactionSelector ?? throw new ArgumentException("InteractionSelector can't be null");
+
+        public void Display()
         {
-            _interactionSelector = interactionSelector ?? throw new ArgumentException("Cell can't be null");
-        }
-        
-        public void Display(ICell cell)
-        {
-            if (cell == null)
-                throw new InvalidOperationException("You need to init cell first");
+            if (_cell == null)
+                throw new InvalidOperationException("Cell can't be null");
 
-            SetupUsingButton(cell);
-            _flagView.Display(cell);
-            _bombsCountView.Display(cell.Data.CountOfBombsNearby);
+            SetupUsingButton();
+            _flagView.Display(_cell);
+            _bombsCountView.Display(_cell.Data.CountOfBombsNearby);
 
-            if (cell.IsOpened)
+            if (_cell.IsOpened)
                 _usingButton.enabled = false;
             
-            switch (cell.IsOpened)
+            switch (_cell.IsOpened)
             {
-                case true when cell.Data.IsMined:
+                case true when _cell.Data.IsMined:
                     _cellAnimations.PlayExplosionAnimation();
                     return;
                 
@@ -49,13 +52,13 @@ namespace Minesweeper.Runtime.View.Cells
             }
         }
         
-        private void SetupUsingButton(ICell cell)
+        private void SetupUsingButton()
         {
-            if (cell == null)
-                throw new InvalidOperationException("You need to init cell first");
+            _usingButton.RemoveAllListeners();
+            _usingButton.RemoveAllHoldListeners();
             
-            _usingButton.onClick.RemoveAllListeners();
-            _usingButton.onClick.AddListener(() => _interactionSelector.CurrentInteraction.Interact(cell));
+            _usingButton.AddListener(new InteractButtonAction(_cell, _interactionSelector.CurrentInteraction));
+            _usingButton.AddHoldListener(new InteractButtonAction(_cell, _interactionSelector.CurrentHoldInteraction));
         }
     }
 }

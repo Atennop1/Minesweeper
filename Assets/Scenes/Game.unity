@@ -174,9 +174,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de0deb760b7d43efa5c4c8d6c4f38bff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 1421295902}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _restartButton
+      Entry: 10
+      Data: 0
   _invisiblePanel: {fileID: 1281967434}
   _gameWinScreen: {fileID: 1776775733}
-  _restartButton: {fileID: 1421295899}
   _sceneData: {fileID: 11400000, guid: e1baa5a266cbfa04394b4a81220116f7, type: 2}
 --- !u!1 &5564736
 GameObject:
@@ -1167,6 +1179,8 @@ MonoBehaviour:
     SerializedBytes: 
     ReferencedUnityObjects:
     - {fileID: 1714130160}
+    - {fileID: 1080332575}
+    - {fileID: 1046417528}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -1175,6 +1189,12 @@ MonoBehaviour:
     - Name: _flagsView
       Entry: 10
       Data: 0
+    - Name: _digInteractionButton
+      Entry: 10
+      Data: 1
+    - Name: _flagInteractionButton
+      Entry: 10
+      Data: 2
   _mainCellsFieldRoot: {fileID: 5564738}
   _selectorView: {fileID: 1471352306}
 --- !u!1 &1046417523
@@ -1284,6 +1304,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 1046417529}
+  _timeNeededToHoldInMilliseconds: 100
 --- !u!114 &1046417529
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1382,6 +1403,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _button: {fileID: 1080332577}
+  _timeNeededToHoldInMilliseconds: 100
 --- !u!114 &1080332576
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1641,6 +1663,7 @@ GameObject:
   - component: {fileID: 1152366190}
   - component: {fileID: 1152366189}
   - component: {fileID: 1152366188}
+  - component: {fileID: 1152366191}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -1751,6 +1774,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1152366186}
   m_CullTransparentMesh: 1
+--- !u!114 &1152366191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1152366186}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07efebc4049d4c00bb42576e85079c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1152366188}
+  _timeNeededToHoldInMilliseconds: 100
 --- !u!1 &1243336153
 GameObject:
   m_ObjectHideFlags: 0
@@ -1933,6 +1970,7 @@ GameObject:
   - component: {fileID: 1421295901}
   - component: {fileID: 1421295900}
   - component: {fileID: 1421295899}
+  - component: {fileID: 1421295902}
   m_Layer: 5
   m_Name: RestartButton
   m_TagString: Untagged
@@ -2043,6 +2081,20 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1421295897}
   m_CullTransparentMesh: 1
+--- !u!114 &1421295902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421295897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07efebc4049d4c00bb42576e85079c13, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 1421295899}
+  _timeNeededToHoldInMilliseconds: 100
 --- !u!1 &1437579004
 GameObject:
   m_ObjectHideFlags: 0
@@ -2170,9 +2222,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52503598cd4f4aa09f1cae6c131551c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  serializationData:
+    SerializedFormat: 2
+    SerializedBytes: 
+    ReferencedUnityObjects:
+    - {fileID: 1152366191}
+    SerializedBytesString: 
+    Prefab: {fileID: 0}
+    PrefabModificationsReferencedUnityObjects: []
+    PrefabModifications: []
+    SerializationNodes:
+    - Name: _restartButton
+      Entry: 10
+      Data: 0
   _invisiblePanel: {fileID: 1437579004}
   _gameOverScreen: {fileID: 2142607026}
-  _restartButton: {fileID: 1152366188}
   _sceneData: {fileID: 11400000, guid: e1baa5a266cbfa04394b4a81220116f7, type: 2}
 --- !u!1 &1453311092
 GameObject:
@@ -2365,8 +2429,6 @@ MonoBehaviour:
     ReferencedUnityObjects:
     - {fileID: 342868351}
     - {fileID: 582722652}
-    - {fileID: 1080332575}
-    - {fileID: 1046417528}
     SerializedBytesString: 
     Prefab: {fileID: 0}
     PrefabModificationsReferencedUnityObjects: []
@@ -2378,12 +2440,6 @@ MonoBehaviour:
     - Name: _flagInteractionView
       Entry: 10
       Data: 1
-    - Name: _digInteractionButton
-      Entry: 10
-      Data: 2
-    - Name: _flagInteractionButton
-      Entry: 10
-      Data: 3
 --- !u!1 &1587218679
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,9 +1,10 @@
-﻿using Minesweeper.Runtime.Model.Buttons.ClickActions;
+﻿using Minesweeper.Runtime.Model.Buttons.ButtonActions;
 
 namespace Minesweeper.Runtime.Model.Buttons
 {
     public interface IButton
     {
-        void AddListener(IButtonClickAction action);
+        void AddListener(IButtonAction action);
+        void AddHoldListener(IButtonAction action);
     }
 }

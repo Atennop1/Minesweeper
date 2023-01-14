@@ -23,10 +23,12 @@ namespace Minesweeper.Runtime.Root
             
             _gameStateRoot.Compose(cellsField);
             var interactionsSelector = interactionsSelectorRoot.Compose(cellsField);
-            interactionsSelector.Select(new DigInteraction(cellsField));
             
+            interactionsSelector.SelectInteraction(new DigInteraction(cellsField));
             _cellViewFactory.BindInteractionSelector(interactionsSelector);
-            cellsField.OpenCell(cellsField.Cells[tapedCellData.PositionY, tapedCellData.PositionX]);
+            
+            if (!cellsField.Cells[tapedCellData.PositionY, tapedCellData.PositionX].IsFlagged)
+                cellsField.OpenCell(cellsField.Cells[tapedCellData.PositionY, tapedCellData.PositionX]);
         }
 
         private List<Vector2Int> BuildForbiddenCellsCoordinate(CellData tapedCellData)

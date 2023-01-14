@@ -2,7 +2,8 @@
 {
     public interface IInteractionSelector
     {
+        IInteraction CurrentHoldInteraction { get; }
         IInteraction CurrentInteraction { get; }
-        void Select(IInteraction interaction);
+        void SelectInteraction(IInteraction interaction);
     }
 }

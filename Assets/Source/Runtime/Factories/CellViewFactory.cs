@@ -21,7 +21,11 @@ namespace Minesweeper.Runtime.Factories
             if (interactionSelector == null) 
                 throw new ArgumentException("InteractionSelector can't be null");
             
-            _spawnedView.ForEach(cellsLine => cellsLine.ForEach(cellView => cellView.Init(interactionSelector)));
+            _spawnedView.ForEach(cellsLine => cellsLine.ForEach(cellView =>
+            {
+                cellView.InitSelector(interactionSelector);
+                cellView.Display();
+            }));
         }
         
         public ICellView Create(CellData cellData)

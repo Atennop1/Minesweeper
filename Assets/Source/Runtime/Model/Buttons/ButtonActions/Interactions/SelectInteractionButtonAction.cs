@@ -2,15 +2,15 @@
 using Minesweeper.Runtime.Model.Interactions;
 using Minesweeper.Runtime.View.Interactions;
 
-namespace Minesweeper.Runtime.Model.Buttons.ClickActions
+namespace Minesweeper.Runtime.Model.Buttons.ButtonActions
 {
-    public class InteractionSelectButtonAction : IButtonClickAction
+    public class SelectInteractionButtonAction : IButtonAction
     {
         private readonly IInteractionSelectorView _interactionSelectorView;
         private readonly IInteractionSelector _interactionSelector;
         private readonly IInteraction _interaction;
 
-        public InteractionSelectButtonAction(IInteractionSelectorView interactionSelectorView, 
+        public SelectInteractionButtonAction(IInteractionSelectorView interactionSelectorView, 
             IInteractionSelector interactionSelector, IInteraction interaction)
         {
             _interactionSelectorView = interactionSelectorView ?? throw new ArgumentException("InteractionSelectorView can't be null");
@@ -20,7 +20,7 @@ namespace Minesweeper.Runtime.Model.Buttons.ClickActions
 
         public void Invoke()
         {
-            _interactionSelector.Select(_interaction);
+            _interactionSelector.SelectInteraction(_interaction);
             _interactionSelectorView.Display(_interactionSelector);
         }
     }

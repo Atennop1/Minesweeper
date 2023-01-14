@@ -24,6 +24,7 @@ namespace Minesweeper.Runtime.Root
             
             var cellsField = new CellsField(_cellsFactory.Create(fieldData), fieldData);
             _cellViewFactory.BindInteractionSelector(interactionsSelectorRoot.Compose(cellsField));
+
             return cellsField;
         }
     }
