@@ -11,16 +11,18 @@ namespace Minesweeper.Runtime.Root
         [SerializeField] private Button _playButton;
         [SerializeField] private Button _settingsButton;
         [SerializeField] private Button _quitButton;
+        [SerializeField] private Button _fromSettingsToMenuButton;
 
         [Space]
         [SerializeField] private SceneData _gameSceneData;
         [SerializeField] private GameObject _mainScreen;
         [SerializeField] private GameObject _settingsScreen;
-        
+
         private void Awake()
         {
             _playButton.AddListener(new LoadSceneButtonAction(_gameSceneData));
             _settingsButton.AddListener(new SwitchScreenButtonAction(_mainScreen, _settingsScreen));
+            _fromSettingsToMenuButton.AddListener(new SwitchScreenButtonAction(_settingsScreen, _mainScreen));
             _quitButton.AddListener(new QuitGameButtonAction());
         }
     }

@@ -18,17 +18,11 @@ namespace Minesweeper.Runtime.Model.Buttons
         
         private bool _isHolding;
         private bool _isHoldingComplete;
-
-        public void RemoveAllListeners()
-            => _clickActions.Clear();
-
-        public void RemoveAllHoldListeners() 
-            => _holdingActions.Clear();
         
-        private void OnDisable()
+        private void OnDestroy()
         {
-            RemoveAllListeners();
-            RemoveAllHoldListeners();
+            _clickActions.Clear();
+            _holdingActions.Clear();
         }
 
         public void AddListener(IButtonAction action)

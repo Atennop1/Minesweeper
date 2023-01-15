@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using Minesweeper.Runtime.Factories;
 using Minesweeper.Runtime.Model.Field;
+using Minesweeper.Runtime.Model.Settings;
 using Sirenix.OdinInspector;
 using UnityEngine;
 
@@ -17,7 +18,9 @@ namespace Minesweeper.Runtime.Root
 
         public ICellsField Compose(List<Vector2Int> forbiddenCellsPosition)
         {
-            var fieldData = new CellsFieldData(16, 7, 15);
+            var defaultCellsFieldData = new CellsFieldData(16, 7, 15);
+            var cellsFieldDataContainer = new CellsFieldDataContainer(defaultCellsFieldData);
+            var fieldData = cellsFieldDataContainer.GetFieldData();
             
             _minedCellsDataFactory.Init(forbiddenCellsPosition);
             _cellsFactory.Init(_minedCellsDataFactory, _cellViewFactory);

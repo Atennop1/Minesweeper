@@ -1,5 +1,6 @@
 ﻿using System;
 using Minesweeper.Runtime.View.Cells;
+using UnityEngine;
 
 namespace Minesweeper.Runtime.Model.Cells
 {
@@ -22,7 +23,9 @@ namespace Minesweeper.Runtime.Model.Cells
         {
             if (IsFlagged)
                 throw new ArgumentException("Can't set flag to cell with flag");
-                
+            
+            _cellView.InitCell(this);
+            
             IsFlagged = true;
             _cellView.Display();
         }
@@ -32,6 +35,8 @@ namespace Minesweeper.Runtime.Model.Cells
             if (!IsFlagged)
                 throw new ArgumentException("Can't remove flag from cell without flag");
 
+            _cellView.InitCell(this);
+            
             IsFlagged = false;
             _cellView.Display();
         }

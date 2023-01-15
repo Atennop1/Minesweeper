@@ -1,6 +1,7 @@
 ﻿using System;
 using Minesweeper.Runtime.Model.Cells;
 using Minesweeper.Runtime.Model.Flag;
+using UnityEngine;
 
 namespace Minesweeper.Runtime.Model.Interactions
 {
@@ -23,6 +24,7 @@ namespace Minesweeper.Runtime.Model.Interactions
                     return;
                 
                 case false when _flags.CanTake:
+                    Debug.Log("Interaction");
                     cell.SetFlag();
                     _flags.TakeFlag();
                     break;

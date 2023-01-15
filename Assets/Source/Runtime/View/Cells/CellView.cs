@@ -37,13 +37,14 @@ namespace Minesweeper.Runtime.View.Cells
             if (_cell == null)
                 throw new InvalidOperationException("Cell can't be null");
             
+            Debug.Log(_cell.IsFlagged);
             _flagView.Display(_cell);
             _bombsCountView.Display(_cell.Data.CountOfBombsNearby);
 
             if (_cell.IsOpened)
             {
                 _unityUsingButton.enabled = false;
-                _unityUsingButton.enabled = false;
+                _usingButton.enabled = false;
             }
 
             switch (_cell.IsOpened)
@@ -58,10 +59,10 @@ namespace Minesweeper.Runtime.View.Cells
             }
         }
         
-        private void Awake()
+        private void Start()
         {
             _unityUsingButton.onClick.AddListener(() => new InteractButtonAction(_cell, _interactionSelector.CurrentInteraction).Invoke());
-            
+
             if (_inputTypeStorage.Load<InputType>("InputType") == InputType.Classic)
                 _usingButton.AddHoldListener(new InteractButtonAction(_cell, _interactionSelector.CurrentHoldInteraction));
         }

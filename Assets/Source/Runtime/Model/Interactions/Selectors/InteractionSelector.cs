@@ -11,7 +11,6 @@ namespace Minesweeper.Runtime.Model.Interactions
         {
             CurrentInteraction = interaction 
                                  ?? throw new ArgumentException("Interaction can't be null");
-            
         }
 
         public void SelectHoldInteraction(IInteraction interaction)
