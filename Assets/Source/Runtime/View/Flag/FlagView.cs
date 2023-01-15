@@ -11,9 +11,6 @@ namespace Minesweeper.Runtime.View.Flag
         
         public void Display(ICell cell)
         {
-            Debug.Log("FlagView");
-            Debug.Log(cell.IsFlagged);
-            
             if (_isFlagWasActiveLastTime && cell.IsFlagged || !_isFlagWasActiveLastTime && !cell.IsFlagged)
                 return;
             

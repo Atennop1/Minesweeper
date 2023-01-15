@@ -37,7 +37,6 @@ namespace Minesweeper.Runtime.View.Cells
             if (_cell == null)
                 throw new InvalidOperationException("Cell can't be null");
             
-            Debug.Log(_cell.IsFlagged);
             _flagView.Display(_cell);
             _bombsCountView.Display(_cell.Data.CountOfBombsNearby);
 

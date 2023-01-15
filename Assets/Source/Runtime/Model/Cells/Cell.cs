@@ -1,6 +1,5 @@
 ﻿using System;
 using Minesweeper.Runtime.View.Cells;
-using UnityEngine;
 
 namespace Minesweeper.Runtime.Model.Cells
 {
