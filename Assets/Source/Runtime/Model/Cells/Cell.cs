@@ -44,6 +44,8 @@ namespace Minesweeper.Runtime.Model.Cells
         {
             IsOpened = true;
             IsFlagged = false;
+            
+            _cellView.InitCell(this);
             _cellView.Display();
         }
     }
