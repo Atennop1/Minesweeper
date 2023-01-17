@@ -27,7 +27,7 @@ namespace Minesweeper.Runtime.View.Settings
         {
             var cellsFieldDataContainer = new CellsFieldDataContainer(_defaultData);
             InitializeFields(cellsFieldDataContainer);
-            _logText.text = "Changes applied";
+            _logText.text = string.Empty;
             
             _applyButton.onClick.AddListener(() =>
             {

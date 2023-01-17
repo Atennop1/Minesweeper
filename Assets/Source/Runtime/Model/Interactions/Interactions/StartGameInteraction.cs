@@ -15,6 +15,12 @@ namespace Minesweeper.Runtime.Model.Interactions
                 : throw new ArgumentException("CellsFieldRoot can't be null");
         }
 
-        public void Interact(ICell cell) => _mainCellsFieldRoot.Compose(cell.Data);
+        public void Interact(ICell cell)
+        {
+            if (cell.IsFlagged)
+                return;
+            
+            _mainCellsFieldRoot.Compose(cell.Data);
+        }
     }
 }

@@ -24,7 +24,6 @@ namespace Minesweeper.Runtime.Factories
             _spawnedView.ForEach(cellsLine => cellsLine.ForEach(cellView =>
             {
                 cellView.InitSelector(interactionSelector);
-                cellView.Display();
             }));
         }
         

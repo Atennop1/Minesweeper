@@ -12,25 +12,37 @@ namespace Minesweeper.Runtime.Model.Buttons
     public class Button : MonoBehaviour, IButton, IPointerDownHandler, IPointerUpHandler
     {
         [SerializeField] private int _timeNeededToHoldInMilliseconds;
+        [SerializeField] private Action _onClick;
         
         private readonly List<IButtonAction> _holdingActions = new();
-        private readonly List<IButtonAction> _clickActions = new();
-        
+
         private bool _isHolding;
         private bool _isHoldingComplete;
         
         private void OnDestroy()
         {
-            _clickActions.Clear();
-            _holdingActions.Clear();
+            RemoveAllListeners();
+            RemoveAllHoldListeners();
         }
+
+        public void RemoveAllListeners()
+            => _onClick = null;
+
+        public void RemoveAllHoldListeners()
+            => _holdingActions.Clear();
 
         public void AddListener(IButtonAction action)
         {
             if (action == null)
                 throw new ArgumentException("ButtonClickAction can't be null");
             
-            _clickActions.Add(action);
+            _onClick += action.Invoke;
+        }
+        
+        public void AddListener(Action action)
+        {
+            _onClick += action 
+                        ?? throw new ArgumentException("ButtonClickAction can't be null");
         }
 
         public void AddHoldListener(IButtonAction action)
@@ -44,11 +56,17 @@ namespace Minesweeper.Runtime.Model.Buttons
         public async void OnPointerDown(PointerEventData eventData)
         {
             _isHolding = true;
-            await UniTask.Delay(_timeNeededToHoldInMilliseconds);
+            var timer = 0f;
 
-            if (!_isHolding) 
-                return;
-            
+            while (timer < _timeNeededToHoldInMilliseconds)
+            {
+                if (!_isHolding) 
+                    return;
+                
+                timer += Time.deltaTime * 1000;
+                await UniTask.Yield();
+            }
+
             _holdingActions.ToList().ForEach(action => action.Invoke());
             _isHoldingComplete = true;
         }
@@ -56,7 +74,7 @@ namespace Minesweeper.Runtime.Model.Buttons
         public void OnPointerUp(PointerEventData eventData)
         {
             if (!_isHoldingComplete)
-                _clickActions.ToList().ForEach(action => action.Invoke());
+                _onClick?.Invoke();
 
             _isHoldingComplete = false;
             _isHolding = false;

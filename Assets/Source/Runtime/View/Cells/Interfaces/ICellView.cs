@@ -5,9 +5,7 @@ namespace Minesweeper.Runtime.View.Cells
 {
     public interface ICellView
     {
-        void InitCell(ICell cell);
         void InitSelector(IInteractionSelector interactionSelector);
-        
-        void Display();
+        void Display(ICell cell);
     }
 }

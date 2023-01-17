@@ -4,6 +4,7 @@ using System.Linq;
 using Minesweeper.Runtime.Model.Cells;
 using Minesweeper.Runtime.Root.SystemUpdates;
 using Minesweeper.Runtime.View.GameState;
+using Sirenix.Utilities;
 
 namespace Minesweeper.Runtime.Model.GameState
 {
@@ -27,6 +28,7 @@ namespace Minesweeper.Runtime.Model.GameState
         {
             if (!IsActivated && _cells.Any(cell => cell.IsOpened && cell.Data.IsMined))
             {
+                _cells.Where(cell => cell.Data.IsMined).ForEach(cell => cell.Open());
                 _gameOverView.Display();
                 IsActivated = true;
             }
