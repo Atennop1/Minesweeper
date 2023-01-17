@@ -19,11 +19,12 @@ namespace Minesweeper.Runtime.View.GameState
         [Space]
         [SerializeField] private SceneData _gameSceneData;
         [SerializeField] private SceneData _menuSceneData;
+        [SerializeField] private ISceneLoader _sceneLoader;
 
         public async void Display()
         {
-            _restartButton.AddListener(new LoadSceneButtonAction(_gameSceneData));
-            _toMenuButton.AddListener(new LoadSceneButtonAction(_menuSceneData));
+            _restartButton.AddListener(new LoadSceneButtonAction(_sceneLoader, _gameSceneData));
+            _toMenuButton.AddListener(new LoadSceneButtonAction(_sceneLoader, _menuSceneData));
             _invisiblePanel.SetActive(true);
             
             await UniTask.Delay(500);
