@@ -25,7 +25,7 @@ namespace Minesweeper.Runtime.Tools.LoadSystem
 #endif
         }
 
-        [Button("Validate", ButtonSizes.Large, ButtonStyle.CompactBox), GUIColor(0, 0, 1)]
+        [Button("Validate", ButtonSizes.Large, ButtonStyle.CompactBox), GUIColor(1, 1, 1)]
         public void Validate()
         {
             var existsInBuildingSettings = false;

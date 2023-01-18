@@ -21,7 +21,6 @@ namespace Minesweeper.Runtime.Factories
             _loaderScene = loaderScene;
         }
 
-
         public ISceneLoader Create()
         {
             return _sceneLoadMode switch
