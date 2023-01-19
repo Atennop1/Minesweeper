@@ -1,31 +1,20 @@
-﻿using Minesweeper.Runtime.Model.Field;
-using Minesweeper.Runtime.Tools.SaveSystem;
+﻿using System;
+using Minesweeper.Runtime.Model.Field;
 
 namespace Minesweeper.Runtime.Model.Settings
 {
-    public class CellsFieldDataContainer
+    public class CellsFieldDataContainer : IContainer<CellsFieldData>
     {
-        private readonly BinaryStorage _binaryStorage = new();
-        private readonly CellsFieldDataValidator _dataValidator = new();
-        private readonly CellsFieldData _defaultCellsFieldData;
+        private const string SAVE_PATH = "CellsFieldData";
+        private readonly Container<CellsFieldData> _container;
 
-        public CellsFieldDataContainer(CellsFieldData defaultCellsFieldData)
-        {
-            _defaultCellsFieldData = defaultCellsFieldData;
-        }
+        public CellsFieldDataContainer(Container<CellsFieldData> container)
+            => _container = container ?? throw new ArithmeticException(nameof(container));
 
-        public void SetFieldData(CellsFieldData fieldData)
-        {
-            _dataValidator.Validate(fieldData);
-            _binaryStorage.Save(fieldData, "CellsFieldData");
-        }
+        public void Set(CellsFieldData value)
+            => _container.Set(value, SAVE_PATH);
 
-        public CellsFieldData GetFieldData()
-        {
-            if (!_binaryStorage.Exists("CellsFieldData"))
-                return _defaultCellsFieldData;
-
-            return _binaryStorage.Load<CellsFieldData>("CellsFieldData");
-        }
+        public CellsFieldData Get()
+            => _container.Get(SAVE_PATH);
     }
 }

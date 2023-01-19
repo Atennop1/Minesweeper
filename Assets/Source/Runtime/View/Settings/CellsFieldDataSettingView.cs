@@ -25,7 +25,7 @@ namespace Minesweeper.Runtime.View.Settings
 
         private void Awake()
         {
-            var cellsFieldDataContainer = new CellsFieldDataContainer(_defaultData);
+            var cellsFieldDataContainer = new CellsFieldDataContainer(new Container<CellsFieldData>(_defaultData));
             InitializeFields(cellsFieldDataContainer);
             _logText.text = string.Empty;
             
@@ -45,7 +45,7 @@ namespace Minesweeper.Runtime.View.Settings
                     var sizeY = int.Parse(_sizeYInputField.text);
                     var bombsCount = int.Parse(_bombsCountInputField.text);
                     
-                    cellsFieldDataContainer.SetFieldData(new CellsFieldData(sizeX, sizeY, bombsCount));
+                    cellsFieldDataContainer.Set(new CellsFieldData(sizeX, sizeY, bombsCount));
                     _logText.text = "Changes applied";
                 }
                 catch (TooManyBombsException) { _logText.text = "Bombs count it too big"; }
@@ -57,7 +57,7 @@ namespace Minesweeper.Runtime.View.Settings
 
         private void InitializeFields(CellsFieldDataContainer cellsFieldDataContainer)
         {
-            var lastCellFieldData = cellsFieldDataContainer.GetFieldData();
+            var lastCellFieldData = cellsFieldDataContainer.Get();
             _sizeXInputField.text = lastCellFieldData.SizeX.ToString();
             _sizeYInputField.text = lastCellFieldData.SizeY.ToString();
             _bombsCountInputField.text = lastCellFieldData.TotalBombsCount.ToString();

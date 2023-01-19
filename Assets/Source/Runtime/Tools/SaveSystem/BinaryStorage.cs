@@ -30,6 +30,14 @@ namespace Minesweeper.Runtime.Tools.SaveSystem
             return (T)_formatter.Deserialize(file);
         }
 
+        public T LoadOrDefault<T>(string path, T defaultValue)
+        {
+            if (!Exists(path))
+                return defaultValue;
+
+            return Load<T>(path);
+        }
+
         public void Save<T>(T saveObject, string path)
         {
             var allPath = CreatePath(path);

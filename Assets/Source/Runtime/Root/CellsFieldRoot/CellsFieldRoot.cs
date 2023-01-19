@@ -19,8 +19,8 @@ namespace Minesweeper.Runtime.Root
         public ICellsField Compose(List<Vector2Int> forbiddenCellsPosition)
         {
             var defaultCellsFieldData = new CellsFieldData(16, 7, 15);
-            var cellsFieldDataContainer = new CellsFieldDataContainer(defaultCellsFieldData);
-            var fieldData = cellsFieldDataContainer.GetFieldData();
+            var cellsFieldDataContainer = new CellsFieldDataContainer(new Container<CellsFieldData>(defaultCellsFieldData));
+            var fieldData = cellsFieldDataContainer.Get();
             
             _minedCellsDataFactory.Init(forbiddenCellsPosition);
             _cellsFactory.Init(_minedCellsDataFactory, _cellViewFactory);
