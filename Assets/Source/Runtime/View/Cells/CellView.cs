@@ -57,8 +57,9 @@ namespace Minesweeper.Runtime.View.Cells
             _usingButton.RemoveAllHoldListeners();
             
             _usingButton.AddListener(() => new InteractButtonAction(cell, _interactionSelector.CurrentInteraction).Invoke());
+            var inputTypeContainer = new InputTypeContainer();
 
-            if (_inputTypeStorage.Load<InputType>("InputType") == InputType.Classic)
+            if ((InputType)inputTypeContainer.GetInputTypeIndex() == InputType.Classic)
                 _usingButton.AddHoldListener(new InteractButtonAction(cell, _interactionSelector.CurrentHoldInteraction));
         }
     }

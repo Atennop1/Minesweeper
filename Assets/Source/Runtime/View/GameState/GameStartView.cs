@@ -12,8 +12,9 @@ namespace Minesweeper.Runtime.View.GameState
         public void Display()
         {
             _needToTurnOn.SetActive(true);
-            
-            if (new BinaryStorage().Load<InputType>("InputType") == InputType.Classic)
+            var inputTypeContainer = new InputTypeContainer();
+
+            if ((InputType)inputTypeContainer.GetInputTypeIndex() == InputType.Classic)
                 _needToHideWhenClassicInput.SetActive(false);
         }
     }
