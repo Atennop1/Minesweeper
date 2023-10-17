@@ -9,13 +9,13 @@
 
 ## About project
 
-This project was not planned at all. A couple of hours before New Years, I saw a Minesweeper-related meme and wondered, "How hard would it be to make your own Minesweeper?" Well, the very next day I started developing this project, and on January 5, 2023, the first version was ready
+This project was not planned at all. A couple of hours before New Year, I saw a Minesweeper-related meme and wondered "How hard would it be to make your own Minesweeper?"
+<br>Well, on the next day (1st January) I started developing this project, and on January 5, 2023, the first version was ready
 
 ### Techniques and specifics
- - Project trying to use **OOP**
  - Clean **DI**
+ - Project trying to use **OOP**
  - **MV** Arhitecture style, where model controls view. But this is don't work in some places of project
- - Composite Root
  - Much procedural code :(
  
 ### Tools
@@ -25,4 +25,4 @@ This project was not planned at all. A couple of hours before New Years, I saw a
  
 ## Conclusion
 
-This project was a fun experience because I made a whole game in 5 days.. Also this project was the first experience in more procedural code than in the rest projects
+This project was a fun experience because I made a whole game in 5 days. Also this project was the first experience in procedural projects where my OOP thinking doesn't works
